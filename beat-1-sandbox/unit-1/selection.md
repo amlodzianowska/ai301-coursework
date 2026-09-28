@@ -108,9 +108,9 @@ Reasoning: In my earlier iteration, the rubric rejected this issue because it st
 
 **Check rationale**
 
-`responds-to-issues` | Issue comment thread | Maintainers have not ignored questions or PRs from contributors. If there are no comments from the community, or if the issue was recently opened by a maintainer, this check passes.
+`responds-to-issues` | Issue comment thread | If the thread contains comments from non-maintainers, the most recent non-maintainer comment must either be less than 14 days old or have a subsequent reply from a project maintainer. Issues with zero comments pass automatically.
 
-Reasoning: I originally required a maintainer response within the last 30 days, which failed every candidate. I updated it to this wording because open-source maintainers frequently open "good first issues" and wait for contributors to find them. Penalizing an issue just because it has been sitting quietly without comments causes the rubric to falsely reject perfectly viable, unclaimed beginner tickets.
+Reasoning: I originally required a maintainer response within the last 30 days, which failed every candidate. I updated it to this mechanical 14-day wording because open-source maintainers frequently open "good first issues" and wait for contributors to find them. Penalizing an issue because it has been sitting without comments causes the rubric to falsely reject viable, unclaimed beginner tickets.
 
 **Trade-offs**
 
