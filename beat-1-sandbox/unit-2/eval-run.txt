@@ -1,12 +1,37 @@
-Replace this file with your unit-2 eval run.
+repro-check run: live mode, full package
+Item: https://github.com/codepath/pathreview-ai301-fa26-s3/issues/1
+Drafts: claim-comment.md (already posted on the issue), repro-report.md
+Date: 2026-10-18
 
-Generate it with `--save-run`: the harness writes this file itself, with
-a header recording the model, the tool it graded, and a fingerprint of
-each file in the run.
+Scope: in scope (codepath/pathreview-ai301-fa26-s3). House rules: classmates' claims and repros don't block yours; post your own.
 
-    python3 run_eval.py <your flags> --save-run eval-run.txt
+Checks
+- environment-recorded     pass  Commit 2f4e82f, macOS 26.7.1 arm64, Python 3.14.6, chromadb 1.5.9, SQLAlchemy 2.1.5, structlog 26.1.0; SQLite and stand-in embedder swap explained
+- steps-runnable           pass  repro_issue_1.py and sample_readme.md included in full; trigger runs after `make setup`; UI login and database names match SETUP.md and docker-compose.yml
+- behavior-matches-issue   pass  ArgumentError from query("IngestedSource"); attempt 2 skipped False, check failed True, texts embedded 14
+- claims-match-evidence    pass  The UI conclusion is now backed by two pasted github_ingestion_failed log lines plus psql counts; _record_ingested_source() claim backed by quoted code; the partial result is labelled as partial
+- conventions-respected    pass  The CONTRIBUTING rule "comment that you're working on it" is met; no AI-disclosure rule, though the report discloses anyway
+- claim-is-specific        pass  Names _check_skip() in ingestion/pipeline.py and the string "IngestedSource"; promises only a report
 
-A partial `--limit` or `--only` run refuses to write the file, so only a
-complete run can land here. Do not hand-edit it: the story of the runs it
-took belongs in this unit's write-up, in the four fields below it:
-Run history, Package analysis, Check rationale, and Trade-offs.
+Verdict: accept (ready to post)
+
+Notes (do not affect verdict)
+- UI step 3 still says `samlpe-readme.md` (typo for sample_readme.md?).
+- psql shows 3 reviews, but the steps and logs show 2 submissions. Say where the third came from, or reset with `make reset-db` before rerunning.
+- "None of its Starting ... ingestion lines appear" is a claim about something absent, so the selected log lines can't show it. The code supports it: nothing outside ingestion/pipeline.py uses IngestionPipeline.
+- Voice guide: all rules hold.
+
+```json
+{
+  "item": "https://github.com/codepath/pathreview-ai301-fa26-s3/issues/1",
+  "checks": [
+    {"name": "environment-recorded", "grade": "pass", "evidence": "Commit `2f4e82f`, macOS 26.7.1 arm64, Python 3.14.6 (.venv from `make setup`), chromadb 1.5.9, SQLAlchemy 2.1.5, structlog 26.1.0; SQLite/stub-embedder swap explained"},
+    {"name": "steps-runnable", "grade": "pass", "evidence": "`repro_issue_1.py` and `sample_readme.md` included in full; trigger is `python repro_issue_1.py sample_readme.md` after `make setup`; UI login and DB names match SETUP.md and docker-compose.yml"},
+    {"name": "behavior-matches-issue", "grade": "pass", "evidence": "Output shows `query(\"IngestedSource\") raises ArgumentError`, attempt 2 `skipped False`, `check failed True`, `texts embedded 14`: the swallowed query failure and re-embedding the issue describes"},
+    {"name": "claims-match-evidence", "grade": "pass", "evidence": "UI conclusion now backed by two pasted `github_ingestion_failed ... 'raw_data' is an invalid keyword argument` log lines and psql counts; `_record_ingested_source()` claim backed by quoted code; duplicate vectors named as not reproduced"},
+    {"name": "conventions-respected", "grade": "pass", "evidence": "Repo has no comment requirements beyond CONTRIBUTING step 4 (comment that you're working on it), met by the posted claim; no AI-disclosure rule, report discloses anyway"},
+    {"name": "claim-is-specific", "grade": "pass", "evidence": "Claim names `_check_skip()` in `ingestion/pipeline.py` passing the string \"IngestedSource\"; promises only a report, no fix or date"}
+  ],
+  "verdict": "accept"
+}
+```
