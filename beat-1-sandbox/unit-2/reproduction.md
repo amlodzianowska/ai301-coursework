@@ -326,8 +326,3 @@ I rejected the TOLERANCE option at the bottom of the rubric, "Accept if at most 
 Loosening `behavior-matches-issue` and `claims-match-evidence` risked flipping reject packages to accept, mainly `no-evidence` and `wrong-target`. The confirming full run shows they held: `categories: clear-accept 8/8  disclosure 1/1  no-evidence 4/4  unfollowable-comms 3/3  wrong-target 4/4`. Both were 4/4 in the first run as well.
 
 The case I accept the check will now miss: a cannot-reproduce that names its differences, but where those differences make the attempt meaningless, such as testing an OS-specific bug on a different OS. My check passes that report because it is honest about the gap, and leaves it to the maintainer to judge whether the attempt counts.
-
----
-
-Related paths: `eval-run.txt` in this directory; your skill's files in
-`tools/repro-check/`.
