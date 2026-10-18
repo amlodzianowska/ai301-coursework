@@ -1,37 +1,54 @@
-repro-check run: live mode, full package
-Item: https://github.com/codepath/pathreview-ai301-fa26-s3/issues/1
-Drafts: claim-comment.md (already posted on the issue), repro-report.md
-Date: 2026-10-18
+# eval run written by run_eval.py at 2026-10-18T23:37:37Z
+# model: sonnet (pinned)
+# graded: /Users/an/.claude/skills/repro-check
+# packages: 20 scored
+#   rubric.md  sha256:30e2ec6ab8b14340
+#   evidence-guide.md  sha256:da1ed4b1ecc3f2cc
+#   SKILL.md  sha256:094c7ec26a0f22ed
+#
+grading 20 package(s) with rubric.md + evidence-guide.md, model sonnet, 5 worker(s)...
+  pkg-04: reject
+  pkg-03: accept
+  pkg-01: accept
+  pkg-02: reject
+  pkg-05: accept
+  pkg-07: accept
+  pkg-06: reject
+  pkg-08: reject
+  pkg-10: accept
+  pkg-09: accept
+  pkg-11: accept
+  pkg-13: reject
+  pkg-14: reject
+  pkg-12: accept
+  pkg-15: reject
+  pkg-16: reject
+  pkg-19: reject
+  pkg-20: reject
+  pkg-18: reject
+  pkg-17: reject
 
-Scope: in scope (codepath/pathreview-ai301-fa26-s3). House rules: classmates' claims and repros don't block yours; post your own.
+item    gold    verdict  agree  note
+pkg-01  accept  accept   yes    
+pkg-02  reject  reject   yes    
+pkg-03  accept  accept   yes    
+pkg-04  reject  reject   yes    
+pkg-05  accept  accept   yes    
+pkg-06  reject  reject   yes    
+pkg-07  accept  accept   yes    
+pkg-08  reject  reject   yes    
+pkg-09  accept  accept   yes    
+pkg-10  accept  accept   yes    
+pkg-11  accept  accept   yes    
+pkg-12  accept  accept   yes    
+pkg-13  reject  reject   yes    
+pkg-14  reject  reject   yes    
+pkg-15  reject  reject   yes    
+pkg-16  reject  reject   yes    
+pkg-17  reject  reject   yes    
+pkg-18  reject  reject   yes    
+pkg-19  reject  reject   yes    
+pkg-20  reject  reject   yes    
 
-Checks
-- environment-recorded     pass  Commit 2f4e82f, macOS 26.7.1 arm64, Python 3.14.6, chromadb 1.5.9, SQLAlchemy 2.1.5, structlog 26.1.0; SQLite and stand-in embedder swap explained
-- steps-runnable           pass  repro_issue_1.py and sample_readme.md included in full; trigger runs after `make setup`; UI login and database names match SETUP.md and docker-compose.yml
-- behavior-matches-issue   pass  ArgumentError from query("IngestedSource"); attempt 2 skipped False, check failed True, texts embedded 14
-- claims-match-evidence    pass  The UI conclusion is now backed by two pasted github_ingestion_failed log lines plus psql counts; _record_ingested_source() claim backed by quoted code; the partial result is labelled as partial
-- conventions-respected    pass  The CONTRIBUTING rule "comment that you're working on it" is met; no AI-disclosure rule, though the report discloses anyway
-- claim-is-specific        pass  Names _check_skip() in ingestion/pipeline.py and the string "IngestedSource"; promises only a report
-
-Verdict: accept (ready to post)
-
-Notes (do not affect verdict)
-- UI step 3 still says `samlpe-readme.md` (typo for sample_readme.md?).
-- psql shows 3 reviews, but the steps and logs show 2 submissions. Say where the third came from, or reset with `make reset-db` before rerunning.
-- "None of its Starting ... ingestion lines appear" is a claim about something absent, so the selected log lines can't show it. The code supports it: nothing outside ingestion/pipeline.py uses IngestionPipeline.
-- Voice guide: all rules hold.
-
-```json
-{
-  "item": "https://github.com/codepath/pathreview-ai301-fa26-s3/issues/1",
-  "checks": [
-    {"name": "environment-recorded", "grade": "pass", "evidence": "Commit `2f4e82f`, macOS 26.7.1 arm64, Python 3.14.6 (.venv from `make setup`), chromadb 1.5.9, SQLAlchemy 2.1.5, structlog 26.1.0; SQLite/stub-embedder swap explained"},
-    {"name": "steps-runnable", "grade": "pass", "evidence": "`repro_issue_1.py` and `sample_readme.md` included in full; trigger is `python repro_issue_1.py sample_readme.md` after `make setup`; UI login and DB names match SETUP.md and docker-compose.yml"},
-    {"name": "behavior-matches-issue", "grade": "pass", "evidence": "Output shows `query(\"IngestedSource\") raises ArgumentError`, attempt 2 `skipped False`, `check failed True`, `texts embedded 14`: the swallowed query failure and re-embedding the issue describes"},
-    {"name": "claims-match-evidence", "grade": "pass", "evidence": "UI conclusion now backed by two pasted `github_ingestion_failed ... 'raw_data' is an invalid keyword argument` log lines and psql counts; `_record_ingested_source()` claim backed by quoted code; duplicate vectors named as not reproduced"},
-    {"name": "conventions-respected", "grade": "pass", "evidence": "Repo has no comment requirements beyond CONTRIBUTING step 4 (comment that you're working on it), met by the posted claim; no AI-disclosure rule, report discloses anyway"},
-    {"name": "claim-is-specific", "grade": "pass", "evidence": "Claim names `_check_skip()` in `ingestion/pipeline.py` passing the string \"IngestedSource\"; promises only a report, no fix or date"}
-  ],
-  "verdict": "accept"
-}
-```
+categories: clear-accept 8/8  disclosure 1/1  no-evidence 4/4  unfollowable-comms 3/3  wrong-target 4/4
+agreement: 20/20 scored items  (bar: 18/20: PASS)
